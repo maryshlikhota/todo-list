@@ -1,5 +1,8 @@
 todo-list_env/
 __pycache__/
+node_modules/
+frontend/node_modules/
+todo_list/.env
 *.sqlite3
 .idea/
 .DS_Store
