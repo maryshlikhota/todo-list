@@ -39,21 +39,22 @@
 
 
 .Content {
-    width: 600px;
-    margin: 80px auto 80px;
+    width: 1000px;
+    margin: 60px auto 80px;
 }
 
-.Authors {
+.table {
     margin: 40px 0 80px;
     width: 100%;
 }
 
-.Authors td, .Authors th {
+.table td, .table th {
     text-align: left;
 }
 
 .Menu {
     list-style-type: none;
+    margin: 0 0 80px;
     padding: 0;
 }
 .Menu-item {

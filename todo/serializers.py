@@ -1,12 +1,12 @@
-from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer
 from .models import Project, ToDo
 
-class ProjectSerializer(serializers.ModelSerializer):
+class ProjectModelSerializer(ModelSerializer):
    class Meta:
        model = Project
        fields = '__all__'
 
-class ToDoSerializer(serializers.ModelSerializer):
+class ToDoModelSerializer(ModelSerializer):
    class Meta:
        model = ToDo
        fields = '__all__'

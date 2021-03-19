@@ -9,4 +9,4 @@ class Author(models.Model):
     email = models.EmailField(max_length=254)
 
     def __str__(self):
-        return self.name
+        return self.username

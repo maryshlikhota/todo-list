@@ -17,12 +17,15 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from authors.views import AuthorModelViewSet
-from todo.views import ProjectViewSet, ToDoViewSet
+from todo.views import ProjectModelViewSet, ToDoModelViewSet
 
 router = DefaultRouter()
 router.register('authors', AuthorModelViewSet)
-router.register('projects', ProjectViewSet)
-router.register('todo', ToDoViewSet)
+router.register('projects', ProjectModelViewSet)
+router.register('todo', ToDoModelViewSet)
+
+api_router = DefaultRouter()
+# api_router.register()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,5 +33,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(router.urls)),
     path('authors/', include(router.urls)),
+    path('projects/', include(router.urls)),
+    path('todo/', include(router.urls)),
     path('', include(router.urls)),
 ]
