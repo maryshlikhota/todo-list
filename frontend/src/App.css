@@ -50,11 +50,20 @@
 
 .table td, .table th {
     text-align: left;
+    padding: 10px 0;
+}
+
+.table td {
+    padding: 4px 0;
+}
+
+.table th {
+    padding: 14px 0;
 }
 
 .Menu {
     list-style-type: none;
-    margin: 0 0 80px;
+    margin: 0 0 60px;
     padding: 0;
 }
 .Menu-item {
@@ -63,4 +72,19 @@
 }
 .Footer {
     margin: 40px 0 60px;
+}
+
+.ContentWrap {
+    min-height: 300px;
+    text-align: left;
+}
+
+.TextBlock {
+    margin-bottom: 22px;
+}
+
+.TextBlock span {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 4px;
 }

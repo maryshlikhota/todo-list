@@ -2,12 +2,16 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios'
-import AuthorList from './components/Author.js'
-import ProjectList from './components/Projects.js'
+import AuthorList from './components/Authors.js'
+import AuthorItem from './components/AuthorItem.js'
+import ProjectsList from './components/Projects.js'
+import ProjectItem from './components/ProjectItem.js'
 import ToDoList from './components/ToDo.js'
+import ToDoItem from './components/ToDoItem.js'
+import Index from './components/Index.js'
 import MenuList from './components/Menu.js'
 import Footer from './components/Footer.js'
-import {HashRouter, Route, Link, Switch, Redirect, BrowserRouter} from 'react-router-dom'
+import { HashRouter, Route, Link, Switch, Redirect, BrowserRouter } from 'react-router-dom'
 
 const NotFound404 = ({ location }) => {
     return (
@@ -40,13 +44,13 @@ class App extends React.Component {
                     const authors = responses[0].data;
                     const projects = responses[1].data;
                     const todo_list = responses[2].data;
-                    console.log("—————————————responses —————————————————— " + authors);
                     this.setState(
                         {
                             'authors': authors,
                             'projects': projects,
                             'todo_list': todo_list,
                             'menu_list': [
+                                {'url': '/', 'title': 'Main'},
                                 {'url': '/authors', 'title': 'Authors'},
                                 {'url': '/projects', 'title': 'Projects'},
                                 {'url': '/todo', 'title': 'ToDo'},
@@ -60,24 +64,34 @@ class App extends React.Component {
             ).catch(error => console.log(error))
     }
 
-   render () {
-       return (
+    render () {
+        return (
             <div className="App Content">
                 <BrowserRouter>
                     <MenuList menu_list={this.state.menu_list} />
-                    <Switch>
-                        <Route exact path='/authors' component={() => <AuthorList authors={this.state.authors} />}  />
-                        <Route exact path='/' component={() => <ProjectList projects={this.state.projects} authors={this.state.authors} />} />
-                        <Route exact path='/todo' component={() => <ToDoList todo_list={this.state.todo_list} />} />
-                        <Redirect from='/projects' to='/' />
-                        <Route component={NotFound404} />
-                    </Switch>
+                    <div className="ContentWrap">
+                        <Switch>
+                            <Route exact path='/' component={() => <Index />} />
+                            <Route exact path='/authors' component={() => <AuthorList authors={this.state.authors} />}  />
+                            <Route exact path='/projects' component={() => <ProjectsList projects={this.state.projects} />} />
+                            <Route exact path='/todo' component={() => <ToDoList todo_list={this.state.todo_list} />} />
+                            <Route path="/author/:username">
+                                <AuthorItem authors={this.state.authors} />
+                            </Route>
+                            <Route path="/project/:id">
+                                <ProjectItem projects={this.state.projects} />
+                            </Route>
+                            <Route path="/todo/:id">
+                                <ToDoItem todo_list={this.state.todo_list} />
+                            </Route>
+                            <Route component={NotFound404} />
+                        </Switch>
+                    </div>
                     <Footer footer={this.state.footer} />
                 </BrowserRouter>
             </div>
-       )
-   }
+        )
+    }
 }
-
 
 export default App;

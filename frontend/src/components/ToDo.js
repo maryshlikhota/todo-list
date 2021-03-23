@@ -1,28 +1,30 @@
 import React from "react";
+import Moment from 'react-moment';
+import { Link } from 'react-router-dom'
 
 const ToDoItem = ({todo_item}) => {
     return (
         <tr>
             <td>
-                {todo_item.name}
+                <Link to={`todo/${todo_item.id}`}>{todo_item.name}</Link>
             </td>
             <td>
-                {todo_item.project}
+                <Link to={`project/${todo_item.project.id}`}>{todo_item.project.name}</Link>
             </td>
             <td>
-                {todo_item.author}
+                {todo_item.author.first_name} {todo_item.author.last_name}
             </td>
             <td>
                 {todo_item.text}
             </td>
             <td>
-                {todo_item.created}
+                <Moment format="YYYY-MM-DD HH:mm">{todo_item.created}</Moment>
             </td>
             <td>
-                {todo_item.modified}
+                <Moment format="YYYY-MM-DD HH:mm">{todo_item.modified}</Moment>
             </td>
             <td>
-                {todo_item.is_active}
+                {todo_item.is_active.toString()}
             </td>
         </tr>
     )

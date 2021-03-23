@@ -1,39 +1,34 @@
 import React from "react";
+import { Link } from 'react-router-dom'
 
 const MemberItem = ({member}) => {
     return (
-        <li>
-            {member}
-        </li>
+        <span>
+            {member.first_name} {member.last_name}
+        </span>
     )
 }
 
-const MemberList = ({members, authors}) => {
-    return (
-        <ul>
-            {members.map((member) => <MemberItem member={member} />)}
-        </ul>
-    )
-}
-
-
-const ProjectItem = ({project, authors}) => {
+const ProjectsItem = ({project}) => {
     return (
         <tr>
             <td>
-                {project.name}
+                <Link to={`project/${project.id}`}>{project.name}</Link>
             </td>
             <td>
                 {project.repository}
             </td>
             <td>
-                {project.members.map((members) => <MemberList members={project.members} authors={authors}/>)}
+                {project.members.map((member, i) => [
+                    i > 0 && ", ",
+                    <MemberItem key={i} member={member} />
+                ])}
             </td>
         </tr>
     )
 }
 
-const ProjectList = ({projects, authors}) => {
+const ProjectsList = ({projects}) => {
     return (
         <div>
             <table className="Projects table">
@@ -48,10 +43,10 @@ const ProjectList = ({projects, authors}) => {
                         Members
                     </th>
                 </tr>
-                {projects.map((project) => <ProjectItem project={project} authors={authors}/>)}
+                {projects.map((project) => <ProjectsItem project={project} />)}
             </table>
         </div>
     )
 }
 
-export default ProjectList
+export default ProjectsList
