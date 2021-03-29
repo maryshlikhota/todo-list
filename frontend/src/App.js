@@ -41,9 +41,10 @@ class App extends React.Component {
         axios.all([requestAuthors, requestProjects, requestToDo])
             .then(
                 axios.spread((...responses) => {
-                    const authors = responses[0].data;
-                    const projects = responses[1].data;
-                    const todo_list = responses[2].data;
+                    const authors = responses[0].data.results;
+                    const projects = responses[1].data.results;
+                    const todo_list = responses[2].data.results;
+                    console.log('----------------- ', responses)
                     this.setState(
                         {
                             'authors': authors,

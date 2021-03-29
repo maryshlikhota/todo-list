@@ -43,6 +43,16 @@
     margin: 60px auto 80px;
 }
 
+.Content a {
+    color: #444;
+    text-decoration: none;
+}
+
+.Content a:hover {
+    color: #222;
+    text-decoration: underline;
+}
+
 .table {
     margin: 40px 0 80px;
     width: 100%;

@@ -1,17 +1,33 @@
-from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer
 from .models import Project, ToDo
-from authors.serializers import AuthorModelSerializer
+from authors.serializers import AuthorSerializer
 
-class ProjectModelSerializer(serializers.ModelSerializer):
-    members = AuthorModelSerializer(many=True)
+class ProjectSerializer(ModelSerializer):
+    members = AuthorSerializer(many=True, read_only=True)
 
     class Meta:
         model = Project
         fields = '__all__'
 
-class ToDoModelSerializer(serializers.ModelSerializer):
-    project = ProjectModelSerializer()
-    author = AuthorModelSerializer()
+class ProjectReadSerializer(ModelSerializer):
+    members = AuthorSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Project
+        fields = '__all__'
+
+
+class ToDoSerializer(ModelSerializer):
+    project = ProjectSerializer(read_only=True)
+    author = AuthorSerializer(read_only=True)
+
+    class Meta:
+        model = ToDo
+        fields = '__all__'
+
+class ToDoReadSerializer(ModelSerializer):
+    project = ProjectSerializer(read_only=True)
+    author = AuthorSerializer(read_only=True)
 
     class Meta:
         model = ToDo
